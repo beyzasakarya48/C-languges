@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main() {
+    int sayi;
+    int kare;
+  
+    printf("Lutfen bir tamsayi girin: ");
+    scanf("%d", &sayi);
+    kare = sayi * sayi;
+    printf("Girdiginiz sayinin karesi: %d\n", kare);
+    return 0;
+}

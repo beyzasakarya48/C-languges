@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n, i;
+    int toplam = 0;
+    float ortalama;
+    int *dizi; 
+
+    printf("Kac adet sayinin ortalamasini hesaplamak istiyorsunuz? (Pozitif bir tamsayi girin): ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Gecersiz sayi adedi girdiniz.\n");
+        return 1;
+    }
+
+    dizi = (int*) malloc(n * sizeof(int));
+
+    if (dizi == NULL) {
+        printf("Bellek ayirma basarisiz oldu!\n");
+        return 1;
+    }
+
+    printf("%d adet tamsayi girin:\n", n);
+    for (i = 0; i < n; i++) {
+        printf("%d. sayi: ", i + 1);
+        scanf("%d", &dizi[i]);
+        toplam += dizi[i]; 
+    }
+
+    ortalama = (float)toplam / n;
+
+    printf("\nGirilen %d sayinin toplami: %d\n", n, toplam);
+    printf("Girilen sayilarin ortalamasi: %.2f\n", ortalama);
+
+    free(dizi);
+
+    return 0;
+}

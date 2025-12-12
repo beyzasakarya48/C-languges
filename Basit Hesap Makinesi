@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+float hesapla(float sayi1, float sayi2, char islem);
+void menu_goster_hesap_makinesi();
+
+int main() {
+    float s1, s2, sonuc;
+    char op;
+    int secim;
+
+    while (1) {
+        menu_goster_hesap_makinesi();
+        printf("Seçiminizi girin: ");
+        if (scanf("%d", &secim) != 1) {
+            while (getchar() != '\n');
+            secim = 0;
+        }
+
+        if (secim == 2) {
+            printf("Hesap Makinesi kapatılıyor.\n");
+            return 0;
+        } else if (secim == 1) {
+            printf("\n--- Hesaplama ---\n");
+            printf("İlk sayıyı girin: ");
+            scanf("%f", &s1);
+
+            printf("İşlem operatörünü (+, -, *, /) girin: ");
+            // Boşlukları temizleyerek tek karakter okur
+            while (getchar() != '\n');
+            scanf("%c", &op);
+
+            printf("İkinci sayıyı girin: ");
+            scanf("%f", &s2);
+
+            sonuc = hesapla(s1, s2, op);
+
+            printf("\nSonuç: %.2f %c %.2f = %.2f\n", s1, op, s2, sonuc);
+        } else {
+            printf("Geçersiz seçim.\n");
+        }
+        printf("\n--- Devam etmek için Enter'a basın ---\n");
+        // Girdi arabelleğini temizle
+        while (getchar() != '\n');
+        getchar();
+    }
+}
+
+
+void menu_goster_hesap_makinesi() {
+    printf("\n==== Basit Hesap Makinesi ====\n");
+    printf("1. Hesapla\n");
+    printf("2. Çıkış\n");
+    printf("==============================\n");
+}
+
+float hesapla(float sayi1, float sayi2, char islem) {
+    switch (islem) {
+        case '+':
+            return sayi1 + sayi2;
+        case '-':
+            return sayi1 - sayi2;
+        case '*':
+            return sayi1 * sayi2;
+        case '/':
+            // Sıfıra bölme kontrolü
+            if (sayi2 != 0) {
+                return sayi1 / sayi2;
+            } else {
+                printf("\nHATA: Sıfıra bölme hatası!\n");
+                return 0;
+            }
+        default:
+            printf("\nHATA: Geçersiz işlem operatörü!\n");
+            return 0;
+    }
+}
